@@ -26,10 +26,10 @@ public class GroupChat extends Conversation {
     @NotEmpty
     @Size(max = 512)
     private List<Integer> admin;
-    @NotEmpty
-    @Size(max = 512)
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    private List<User> participants;
+//    @NotEmpty
+//    @Size(max = 512)
+//    @ManyToMany(cascade = CascadeType.PERSIST)
+//    private List<User> participants;
     @NotNull
     private boolean isActive;
 
@@ -73,13 +73,13 @@ public class GroupChat extends Conversation {
         this.admin = admin;
     }
 
-    public List<User> getParticipants() {
-        return participants;
-    }
+//    public List<User> getParticipants() {
+//        return participants;
+//    }
 
-    public void setParticipants(List<User> participants) {
-        this.participants = participants;
-    }
+//    public void setParticipants(List<User> participants) {
+//        this.participants = participants;
+//    }
 
     public boolean isActive() {
         return isActive;

@@ -20,8 +20,8 @@ public class SecurityConfiguration {
         return httpSecurity.build();
     }
 
-    @Bean
-    public Argon2PasswordEncoder argon2PasswordEncoder() {
-        return Argon2PasswordEncoder.defaultsForSpringSecurity_v5_8();
-    }
+//    @Bean
+//    public Argon2PasswordEncoder argon2PasswordEncoder() {
+//        return Argon2PasswordEncoder.defaultsForSpringSecurity_v5_8();
+//    }
 }

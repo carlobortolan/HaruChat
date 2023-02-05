@@ -14,17 +14,17 @@ import java.util.List;
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 
 public class DirectChat extends Conversation {
-    @NotEmpty
-    @Size(max = 2)
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    private List<User> participants;
+//    @NotEmpty
+//    @Size(max = 2)
+//    @ManyToMany(cascade = CascadeType.PERSIST)
+//    private List<User> participants;
 
 
-    public List<User> getParticipants() {
-        return participants;
-    }
+//    public List<User> getParticipants() {
+//        return participants;
+//    }
 
-    public void setParticipants(List<User> participants) {
-        this.participants = participants;
-    }
+//    public void setParticipants(List<User> participants) {
+//        this.participants = participants;
+//    }
 }

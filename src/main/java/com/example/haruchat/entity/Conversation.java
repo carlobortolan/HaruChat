@@ -3,9 +3,12 @@ package com.example.haruchat.entity;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 import java.time.ZonedDateTime;
 import java.util.LinkedList;
+import java.util.List;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -15,6 +18,10 @@ public abstract class Conversation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Integer id;
+    @NotEmpty
+    @Size(max = 512)
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    protected List<User> participants;
 
     @OneToMany(mappedBy = "conversation", cascade = CascadeType.ALL)
     private LinkedList<Message> messages;
@@ -54,5 +61,14 @@ public abstract class Conversation {
     public void setMessages(LinkedList<Message> messages) {
         this.updatedAt = ZonedDateTime.now();
         this.messages = messages;
+    }
+
+    public List<User> getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(List<User> participants) {
+        this.updatedAt = ZonedDateTime.now();
+        this.participants = participants;
     }
 }

@@ -36,9 +36,7 @@ public abstract class User implements UserDetails {
     @ManyToMany(cascade = CascadeType.PERSIST)
     private List<User> blockedUsers;
     @ManyToMany(mappedBy = "participants", cascade = CascadeType.PERSIST)
-    private List<GroupChat> groups;
-    @ManyToMany(mappedBy = "participants", cascade = CascadeType.PERSIST)
-    private List<DirectChat> directChats;
+    private List<Conversation> chats;
 
     public void block() {
         //TODO:
@@ -128,19 +126,11 @@ public abstract class User implements UserDetails {
         this.blockedUsers = blockedUsers;
     }
 
-    public List<GroupChat> getGroups() {
-        return groups;
+    public List<Conversation> getChats() {
+        return chats;
     }
 
-    public void setGroups(List<GroupChat> groups) {
-        this.groups = groups;
-    }
-
-    public List<DirectChat> getDirectChats() {
-        return directChats;
-    }
-
-    public void setDirectChats(List<DirectChat> directChats) {
-        this.directChats = directChats;
+    public void setChats(List<Conversation> groups) {
+        this.chats = groups;
     }
 }
