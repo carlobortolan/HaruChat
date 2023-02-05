@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.time.ZonedDateTime;
@@ -25,6 +26,8 @@ public abstract class Conversation {
 
     @OneToMany(mappedBy = "conversation", cascade = CascadeType.ALL)
     private LinkedList<Message> messages;
+    @NotNull
+    private boolean isActive;
     private ZonedDateTime createdAt;
     private ZonedDateTime updatedAt;
 
@@ -71,4 +74,13 @@ public abstract class Conversation {
         this.updatedAt = ZonedDateTime.now();
         this.participants = participants;
     }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
 }

@@ -30,8 +30,6 @@ public class GroupChat extends Conversation {
 //    @Size(max = 512)
 //    @ManyToMany(cascade = CascadeType.PERSIST)
 //    private List<User> participants;
-    @NotNull
-    private boolean isActive;
 
     public void deactivate() {
         //TODO:
@@ -81,11 +79,4 @@ public class GroupChat extends Conversation {
 //        this.participants = participants;
 //    }
 
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public void setActive(boolean active) {
-        isActive = active;
-    }
 }
