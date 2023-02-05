@@ -17,11 +17,14 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @Entity
+@Table(name = "APP_USER")
+@DiscriminatorColumn(name = "user_type", discriminatorType = DiscriminatorType.INTEGER)
 public abstract class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Integer id;
+
     @NotBlank
     @Size(min = 8, max = 128)
     private String password;
@@ -37,6 +40,20 @@ public abstract class User implements UserDetails {
     private List<User> blockedUsers;
     @ManyToMany(mappedBy = "participants", cascade = CascadeType.PERSIST)
     private List<Conversation> chats;
+
+    public User(Integer id, String password, String username, String email, List<User> friends, List<User> blockedUsers, List<Conversation> chats) {
+        this.id = id;
+        this.password = password;
+        this.username = username;
+        this.email = email;
+        this.friends = friends;
+        this.blockedUsers = blockedUsers;
+        this.chats = chats;
+    }
+
+    public User() {
+
+    }
 
     public void block() {
         //TODO:
@@ -58,7 +75,7 @@ public abstract class User implements UserDetails {
         this.id = id;
     }
 
-    @Override
+        @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         final SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority("rolePlaceholder");
         return Collections.singletonList(simpleGrantedAuthority);
@@ -69,7 +86,7 @@ public abstract class User implements UserDetails {
         return this.password;
     }
 
-    @Override
+        @Override
     public String getUsername() {
         return this.username;
     }

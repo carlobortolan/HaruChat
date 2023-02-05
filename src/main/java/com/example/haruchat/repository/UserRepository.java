@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
-    @Query("SELECT u FROM BasicUser u")
+    @Query("SELECT u FROM User u WHERE 'u.user_type' = '0'")
     public Iterable<BasicUser> findAllBasicUsers();
 
 
