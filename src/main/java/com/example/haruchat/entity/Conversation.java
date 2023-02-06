@@ -21,15 +21,30 @@ public abstract class Conversation {
     private Integer id;
     @NotEmpty
     @Size(max = 512)
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(mappedBy = "chats", cascade = CascadeType.PERSIST)
     protected List<User> participants;
 
     @OneToMany(mappedBy = "conversation", cascade = CascadeType.ALL)
     private LinkedList<Message> messages;
     @NotNull
     private boolean isActive;
+    @NotNull
     private ZonedDateTime createdAt;
+    @NotNull
     private ZonedDateTime updatedAt;
+
+    public Conversation(Integer id, List<User> participants, LinkedList<Message> messages, boolean isActive, ZonedDateTime createdAt, ZonedDateTime updatedAt) {
+        this.id = id;
+        this.participants = participants;
+        this.messages = messages;
+        this.isActive = isActive;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
+    public Conversation() {
+
+    }
 
     public Integer getId() {
         return id;

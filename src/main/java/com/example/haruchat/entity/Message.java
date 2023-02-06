@@ -11,29 +11,42 @@ import java.time.ZonedDateTime;
 
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-
 public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Integer id;
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "from_id")
+//    @JoinColumn(name = "from_id")
     @NotNull
     private User from;
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "to_id")
-    @NotNull
-    private User to;
     @NotBlank
     private String content;
-    @ManyToOne
+    @Enumerated(EnumType.STRING)
+    private ReadStatus status;
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @NotNull
     private Conversation conversation;
     @PositiveOrZero
     private int forwardCount = 0;
+    @NotNull
     private ZonedDateTime createdAt;
+    @NotNull
     private ZonedDateTime updatedAt;
+
+    public Message(Integer id, User from, String content, ReadStatus status, Conversation conversation, int forwardCount, ZonedDateTime createdAt, ZonedDateTime updatedAt) {
+        this.id = id;
+        this.from = from;
+        this.content = content;
+        this.status = status;
+        this.conversation = conversation;
+        this.forwardCount = forwardCount;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
+    public Message() {
+    }
 
     public void forward(User next) {
         //TODO:
@@ -50,15 +63,6 @@ public class Message {
     public void setFrom(User from) {
         this.updatedAt = ZonedDateTime.now();
         this.from = from;
-    }
-
-    public User getTo() {
-        return to;
-    }
-
-    public void setTo(User to) {
-        this.updatedAt = ZonedDateTime.now();
-        this.to = to;
     }
 
     public Integer getId() {
@@ -113,4 +117,14 @@ public class Message {
         this.updatedAt = ZonedDateTime.now();
         this.forwardCount = forwardCount;
     }
+
+    public ReadStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ReadStatus status) {
+        this.updatedAt = updatedAt;
+        this.status = status;
+    }
+
 }

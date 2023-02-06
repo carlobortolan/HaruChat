@@ -8,16 +8,24 @@ import jakarta.persistence.ManyToMany;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
+import java.time.ZonedDateTime;
+import java.util.LinkedList;
 import java.util.List;
 
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-
 public class DirectChat extends Conversation {
 //    @NotEmpty
 //    @Size(max = 2)
 //    @ManyToMany(cascade = CascadeType.PERSIST)
 //    private List<User> participants;
+
+    public DirectChat(Integer id, List<User> participants, LinkedList<Message> messages, boolean isActive, ZonedDateTime createdAt, ZonedDateTime updatedAt) {
+        super(id, participants, messages, isActive, createdAt, updatedAt);
+    }
+
+    public DirectChat() {
+    }
 
 
 //    public List<User> getParticipants() {

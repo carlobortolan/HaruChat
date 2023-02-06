@@ -29,6 +29,7 @@ public abstract class User implements UserDetails {
     @Size(min = 8, max = 128)
     private String password;
     @NotBlank
+    @Column(unique = true)
     @Size(min = 1, max = 32)
     private String username;
     @Email
@@ -38,10 +39,14 @@ public abstract class User implements UserDetails {
     private List<User> friends;
     @ManyToMany(cascade = CascadeType.PERSIST)
     private List<User> blockedUsers;
-    @ManyToMany(mappedBy = "participants", cascade = CascadeType.PERSIST)
+    @ManyToMany()
     private List<Conversation> chats;
+    @OneToMany(mappedBy = "from", cascade = CascadeType.PERSIST)
+    private List<Message> messagesSent;
+//    @OneToMany(mappedBy = "to")
+//    private List<Message> messagesReceived;
 
-    public User(Integer id, String password, String username, String email, List<User> friends, List<User> blockedUsers, List<Conversation> chats) {
+    public User(Integer id, String password, String username, String email, List<User> friends, List<User> blockedUsers, List<Conversation> chats, List<Message> messagesSent) {
         this.id = id;
         this.password = password;
         this.username = username;
@@ -49,6 +54,8 @@ public abstract class User implements UserDetails {
         this.friends = friends;
         this.blockedUsers = blockedUsers;
         this.chats = chats;
+        this.messagesSent = messagesSent;
+//        this.messagesReceived = messagesReceived;
     }
 
     public User() {
@@ -75,7 +82,7 @@ public abstract class User implements UserDetails {
         this.id = id;
     }
 
-        @Override
+    @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         final SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority("rolePlaceholder");
         return Collections.singletonList(simpleGrantedAuthority);
@@ -86,7 +93,7 @@ public abstract class User implements UserDetails {
         return this.password;
     }
 
-        @Override
+    @Override
     public String getUsername() {
         return this.username;
     }
@@ -150,4 +157,20 @@ public abstract class User implements UserDetails {
     public void setChats(List<Conversation> groups) {
         this.chats = groups;
     }
+
+    public List<Message> getMessagesSent() {
+        return messagesSent;
+    }
+
+    public void setMessagesSent(List<Message> messagesSent) {
+        this.messagesSent = messagesSent;
+    }
+
+//    public List<Message> getMessagesReceived() {
+//        return messagesReceived;
+//    }
+//
+//    public void setMessagesReceived(List<Message> messagesReceived) {
+//        this.messagesReceived = messagesReceived;
+//    }
 }

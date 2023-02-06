@@ -10,11 +10,12 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import java.time.ZonedDateTime;
+import java.util.LinkedList;
 import java.util.List;
 
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-
 public class GroupChat extends Conversation {
     @NotBlank
     @Size(min = 1, max = 32)
@@ -23,13 +24,32 @@ public class GroupChat extends Conversation {
     private String description;
     @Size(min = 2, max = 512)
     private int limit;
-    @NotEmpty
+//    @NotEmpty
     @Size(max = 512)
     private List<Integer> admin;
 //    @NotEmpty
 //    @Size(max = 512)
 //    @ManyToMany(cascade = CascadeType.PERSIST)
 //    private List<User> participants;
+
+    public GroupChat(Integer id, List<User> participants, LinkedList<Message> messages, boolean isActive, ZonedDateTime createdAt, ZonedDateTime updatedAt, String title, String description, int limit, List<Integer> admin) {
+        super(id, participants, messages, isActive, createdAt, updatedAt);
+        this.title = title;
+        this.description = description;
+        this.limit = limit;
+        this.admin = admin;
+    }
+
+    public GroupChat(String title, String description, int limit, List<Integer> admin) {
+        this.title = title;
+        this.description = description;
+        this.limit = limit;
+        this.admin = admin;
+    }
+
+    public GroupChat() {
+
+    }
 
     public void deactivate() {
         //TODO:

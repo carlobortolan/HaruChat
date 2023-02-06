@@ -10,10 +10,10 @@ import java.util.List;
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @DiscriminatorValue("1")
-
 public class Moderator extends User {
-    public Moderator(Integer id, String password, String username, String email, List<User> friends, List<User> blockedUsers, List<Conversation> chats) {
-        super(id, password, username, email, friends, blockedUsers, chats);
+
+    public Moderator(Integer id, String password, String username, String email, List<User> friends, List<User> blockedUsers, List<Conversation> chats, List<Message> messagesSent) {
+        super(id, password, username, email, friends, blockedUsers, chats, messagesSent);
     }
 
     public Moderator() {
