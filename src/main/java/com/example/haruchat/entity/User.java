@@ -6,8 +6,12 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-import org.springframework.boot.actuate.endpoint.web.Link;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,10 +21,9 @@ import java.util.List;
 @Table(name = "APP_USER")
 @DiscriminatorColumn(name = "user_type", discriminatorType = DiscriminatorType.INTEGER)
 public abstract class User
-//        implements UserDetails
-{
+        implements UserDetails {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
@@ -81,38 +84,38 @@ public abstract class User
         this.id = id;
     }
 
-    // @Override
-    //public Collection<? extends GrantedAuthority> getAuthorities() {
-    //    final SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority("rolePlaceholder");
-    //    return Collections.singletonList(simpleGrantedAuthority);
-    // }
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        final SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority("rolePlaceholder");
+        return Collections.singletonList(simpleGrantedAuthority);
+    }
 
-    // @Override
+    @Override
     public String getPassword() {
         return this.password;
     }
 
-    //  @Override
+    @Override
     public String getUsername() {
         return this.username;
     }
 
-    //  @Override
+    @Override
     public boolean isAccountNonExpired() {
         return true;
     }
 
-    // @Override
+    @Override
     public boolean isAccountNonLocked() {
         return true;
     }
 
-    // @Override
+    @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
-    //@Override
+    @Override
     public boolean isEnabled() {
         return true;
     }

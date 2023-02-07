@@ -1,9 +1,6 @@
 package com.example.haruchat;
 
-import com.example.haruchat.entity.BasicUser;
-import com.example.haruchat.entity.GroupChat;
-import com.example.haruchat.entity.Message;
-import com.example.haruchat.entity.User;
+import com.example.haruchat.entity.*;
 import com.example.haruchat.service.ConversationService;
 import com.example.haruchat.service.MessageService;
 import com.example.haruchat.service.UserService;
@@ -53,6 +50,7 @@ public class HaruChatApplication {
                 }
             }
         }
+        userService.save(new Moderator(0, "pwpwpwpw", "cb", "carlo.bortolan@tum.de", null, null, null, null));
         System.out.println("END");
     }
 
