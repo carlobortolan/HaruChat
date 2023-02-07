@@ -16,16 +16,16 @@ import java.util.List;
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public abstract class Conversation {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
     @NotEmpty
     @Size(max = 512)
-    @ManyToMany(mappedBy = "chats", cascade = CascadeType.PERSIST)
+    @ManyToMany(mappedBy = "chats")
     protected List<User> participants;
 
     @OneToMany(mappedBy = "conversation", cascade = CascadeType.ALL)
-    private LinkedList<Message> messages;
+    private List<Message> messages;
     @NotNull
     private boolean isActive;
     @NotNull
@@ -33,13 +33,12 @@ public abstract class Conversation {
     @NotNull
     private ZonedDateTime updatedAt;
 
-    public Conversation(Integer id, List<User> participants, LinkedList<Message> messages, boolean isActive, ZonedDateTime createdAt, ZonedDateTime updatedAt) {
-        this.id = id;
+    public Conversation(List<User> participants, LinkedList<Message> messages) {
         this.participants = participants;
         this.messages = messages;
-        this.isActive = isActive;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+        this.isActive = true;
+        this.createdAt = ZonedDateTime.now();
+        this.updatedAt = ZonedDateTime.now();
     }
 
     public Conversation() {
@@ -72,11 +71,11 @@ public abstract class Conversation {
         this.updatedAt = ZonedDateTime.now();
     }
 
-    public LinkedList<Message> getMessages() {
+    public List<Message> getMessages() {
         return messages;
     }
 
-    public void setMessages(LinkedList<Message> messages) {
+    public void setMessages(List<Message> messages) {
         this.updatedAt = ZonedDateTime.now();
         this.messages = messages;
     }

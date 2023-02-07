@@ -21,11 +21,19 @@ public class ConversationService {
         return conversationRepository.findById(conversationId).orElse(null);
     }
 
+    public Iterable<Conversation> findAll() {
+        return conversationRepository.findAll();
+    }
+
     public Iterable<Conversation> findAllByUserId(int userId) {
         return conversationRepository.findAllByUserId(userId);
     }
+
     public Iterable<Conversation> findAllActiveByUserId(int userId) {
         return conversationRepository.findAllActiveByUserId(userId);
+    }
+    public Iterable<Conversation> findAllInactiveByUserId(int userId) {
+        return conversationRepository.findAllInactiveByUserId(userId);
     }
 
     public void deleteById(int conversationId) {

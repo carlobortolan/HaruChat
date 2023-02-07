@@ -13,36 +13,35 @@ import java.time.ZonedDateTime;
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Message {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne()
 //    @JoinColumn(name = "from_id")
-    @NotNull
+    @NotNull(message = "FROM CANNOT BE NULL")
     private User from;
-    @NotBlank
+    @NotBlank (message = "CONTENT CANNOT BE BLANK")
     private String content;
     @Enumerated(EnumType.STRING)
     private ReadStatus status;
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @NotNull
+    @ManyToOne()
+    @NotNull(message = "CONVERSATION CANNOT BE NULL")
     private Conversation conversation;
-    @PositiveOrZero
+    @PositiveOrZero (message = "FORWARDCOUNT CANNOT BE NEGATIVE")
     private int forwardCount = 0;
     @NotNull
     private ZonedDateTime createdAt;
     @NotNull
     private ZonedDateTime updatedAt;
 
-    public Message(Integer id, User from, String content, ReadStatus status, Conversation conversation, int forwardCount, ZonedDateTime createdAt, ZonedDateTime updatedAt) {
-        this.id = id;
+    public Message(User from, String content, Conversation conversation, int forwardCount) {
         this.from = from;
         this.content = content;
-        this.status = status;
+        this.status = ReadStatus.NOT_DELIVERED;
         this.conversation = conversation;
         this.forwardCount = forwardCount;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+        this.createdAt = ZonedDateTime.now();
+        this.updatedAt = ZonedDateTime.now();
     }
 
     public Message() {

@@ -20,8 +20,9 @@ public class DirectChat extends Conversation {
 //    @ManyToMany(cascade = CascadeType.PERSIST)
 //    private List<User> participants;
 
-    public DirectChat(Integer id, List<User> participants, LinkedList<Message> messages, boolean isActive, ZonedDateTime createdAt, ZonedDateTime updatedAt) {
-        super(id, participants, messages, isActive, createdAt, updatedAt);
+
+    public DirectChat(List<User> participants, LinkedList<Message> messages) {
+        super(participants, messages);
     }
 
     public DirectChat() {

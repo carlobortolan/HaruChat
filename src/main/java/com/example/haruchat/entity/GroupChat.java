@@ -2,12 +2,8 @@ package com.example.haruchat.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.time.ZonedDateTime;
@@ -22,9 +18,9 @@ public class GroupChat extends Conversation {
     private String title;
     @Size(min = 1, max = 128)
     private String description;
-    @Size(min = 2, max = 512)
-    private int limit;
-//    @NotEmpty
+    //  @Size(min = 2, max = 512)
+    private int limittt;
+    //    @NotEmpty
     @Size(max = 512)
     private List<Integer> admin;
 //    @NotEmpty
@@ -32,18 +28,12 @@ public class GroupChat extends Conversation {
 //    @ManyToMany(cascade = CascadeType.PERSIST)
 //    private List<User> participants;
 
-    public GroupChat(Integer id, List<User> participants, LinkedList<Message> messages, boolean isActive, ZonedDateTime createdAt, ZonedDateTime updatedAt, String title, String description, int limit, List<Integer> admin) {
-        super(id, participants, messages, isActive, createdAt, updatedAt);
-        this.title = title;
-        this.description = description;
-        this.limit = limit;
-        this.admin = admin;
-    }
 
-    public GroupChat(String title, String description, int limit, List<Integer> admin) {
+    public GroupChat(List<User> participants, LinkedList<Message> messages, String title, String description, int limittt, List<Integer> admin) {
+        super(participants, messages);
         this.title = title;
         this.description = description;
-        this.limit = limit;
+        this.limittt = limittt;
         this.admin = admin;
     }
 
@@ -76,11 +66,11 @@ public class GroupChat extends Conversation {
     }
 
     public int getLimit() {
-        return limit;
+        return limittt;
     }
 
-    public void setLimit(int limit) {
-        this.limit = limit;
+    public void setLimit(int limittt) {
+        this.limittt = limittt;
     }
 
     public List<Integer> getAdmin() {
