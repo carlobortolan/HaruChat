@@ -18,7 +18,7 @@ does not include any tests (yet)._
 
 ## How it works
 
-(The use of tools such as POSTMAN is highly recommended)
+(The use of tools such as [POSTMAN](https://www.postman.com/) is highly recommended)
 
 ### Credentials for easy access:
 
