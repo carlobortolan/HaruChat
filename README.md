@@ -162,17 +162,19 @@ To access the API go to http://localhost:8080/login.
 Per default the standard H2-DataBase is used.
 To change this to a MySQL database:
 
+
+
 1. Create a new schema called "haruchat" in MySQL
-2. Go to application.properties
+2. Open [application.properties](src/main/resources/application.properties)
     - change: `spring.datasource.url=jdbc:h2:mem:testdb` \
       to: `spring.datasource.url=jdbc:mysql://localhost:3306/haruchat
       `
 
     - add:
-    ```
-    spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-    spring.jpa.hibernate.ddl-auto=update
-    ```
+      ```
+      spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+      spring.jpa.hibernate.ddl-auto=update
+      ```
     - insert your MySQL credentials in `spring.datasource.username=`and `spring.datasource.password=`
 
 ## What's next
