@@ -33,7 +33,9 @@ You can now access the API as an Admin using the provided JWT-Token as Bearer To
 To access the database go to http://localhost:8080/h2-console/. \
 To access the API go to http://localhost:8080/login.
 
-> **NOTE:** _(per default this API uses the H2-DataBase which doesn't need additional programs to be used. To change this to MySQL or similar DBMS see 'Setting up persistent database with MySQL')._
+> **NOTE:** _(per default this API uses the H2-DataBase which doesn't need additional programs to be used. To change
+this to MySQL or similar DBMS read [here](#setting-up-persistent-database-with-mysql))._
+
 ## Endpoints
 
 <details><summary><b>Authentication</b></summary>
@@ -161,8 +163,6 @@ To access the API go to http://localhost:8080/login.
 
 Per default the standard H2-DataBase is used.
 To change this to a MySQL database:
-
-
 
 1. Create a new schema called "haruchat" in MySQL
 2. Open [application.properties](src/main/resources/application.properties)
