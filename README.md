@@ -12,8 +12,8 @@ does not include any tests (yet)._
 - Full CRUD-Operations supported (_see [Endpoints](#endpoints)_)
 - User data securely stored and encrypted in database
 - Integration of Spring-Security:
-    - Basic Authentication by username (email) and password
-    - JWT Token Authentication (by bearer token) for stateless access without needing to provide the credentials in
+    - Basic authentication by username (email) and password
+    - JWT Token authentication for stateless access without needing to provide the credentials in
       every request
 
 ## How it works
