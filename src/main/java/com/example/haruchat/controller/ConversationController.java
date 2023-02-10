@@ -39,7 +39,7 @@ public class ConversationController {
         return new ResponseEntity<Iterable<Conversation>>(conversationService.findAllActiveByUserId(id), HttpStatus.OK);
     }
 
-    @GetMapping("/conversations/by/{id}/inactive")
+    @GetMapping("/conversations/of/{id}/inactive")
     public ResponseEntity<?> findAllInactive(@PathVariable int id) {
         return new ResponseEntity<Iterable<Conversation>>(conversationService.findAllInactiveByUserId(id), HttpStatus.OK);
     }

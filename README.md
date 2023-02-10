@@ -7,12 +7,14 @@ does not include any tests (yet)._
 
 ## Core functionalities
 
-- API that creates basis for a chat platform consisting of multiple users that can start conversations (either direct conversations or group conversations) and exchange messages
+- API that creates basis for a chat platform consisting of multiple users that can start conversations (either direct
+  conversations or group conversations) and exchange messages
 - Full CRUD-Operations available (_see Endpoints below_)
 - User data securely stored and encrypted in database
 - Integration of Spring-Security:
     - Basic Authentication by username (email) and password
-    - JWT Token Authentication (by bearer token) for stateless access without needing to provide the credentials in every request
+    - JWT Token Authentication (by bearer token) for stateless access without needing to provide the credentials in
+      every request
 
 ## How it works
 
@@ -35,6 +37,11 @@ To access the api go to http://localhost:8080/login.
 
 <details><summary><b>Authentication</b></summary>
 
+| **HTTP** | **URL**        | **Authentication** | **Request Body (JSON)**          | **Response Body (JSON)** | 
+|----------|----------------|--------------------|----------------------------------|--------------------------|
+| GET      | */api/welcome* | no                 | serialized authentication object | [empty]                  | 
+| GET      | */api/token*   | yes (basic)        | serialized authentication object | [empty]                  | 
+
 > Welcome message: \
 > <span style="color:lawngreen"> GET </span> */api/welcome*
 >
@@ -43,6 +50,15 @@ To access the api go to http://localhost:8080/login.
 </details>
 
 <details><summary><b>Users</b></summary>
+
+| **HTTP** | **URL**            | **Authentication** | **Request Body (JSON)** | **Response Body (JSON)**  | 
+|----------|--------------------|--------------------|-------------------------|---------------------------|
+| POST     | */api/users*       | yes                | serialized user object  | serialized user object    | 
+| GET      | */api/users*       | yes                | [empty]                 | serialized Iterable<User> | 
+| GET      | */api/users/basic* | yes                | [empty]                 | serialized Iterable<User> | 
+| GET      | */api/users/{id}*  | yes                | [empty]                 | serialized user object    | 
+| PUT      | */api/users/{id}*  | yes                | serialized user object  | [empty]                   | 
+| DELETE   | */api/users/{id}*  | yes                | [empty]                 | [empty]                   | 
 
 > Save a new user: \
 > <span style="color:lawngreen"> POST </span> */api/users*
@@ -57,7 +73,7 @@ To access the api go to http://localhost:8080/login.
 > <span style="color:lawngreen"> GET </span> */api/users/{id}*
 
 
-> Update or replace a user \
+> Update or replace a user: \
 > <span style="color:lawngreen"> PUT </span> */api/users/{id}*
 
 > Delete a specific user:\
@@ -65,6 +81,16 @@ To access the api go to http://localhost:8080/login.
 </details>
 
 <details><summary><b>Messages</b></summary>
+
+| **HTTP** | **URL**                 | **Authentication** | **Request Body (JSON)**   | **Response Body (JSON)**     | 
+|----------|-------------------------|--------------------|---------------------------|------------------------------|
+| POST     | */api/messages*         | yes                | serialized message object | serialized message object    | 
+| GET      | */api/messages*         | yes                | [empty]                   | serialized Iterable<Message> | 
+| GET      | */api/messages/by/{id}* | yes                | [empty]                   | serialized Iterable<Message> | 
+| GET      | */api/messages/{id}*    | yes                | [empty]                   | serialized message object    | 
+| PUT      | */api/messages/{id}*    | yes                | serialized message object | [empty]                      | 
+| DELETE   | */api/messages/{id}*    | yes                | [empty]                   | [empty]                      | 
+| DELETE   | */api/messages/{time}*  | yes                | [empty]                   | [empty]                      | 
 
 > Save a new message: \
 > <span style="color:lawngreen"> POST </span> */api/messages*
@@ -80,7 +106,7 @@ To access the api go to http://localhost:8080/login.
 > <span style="color:lawngreen"> GET </span> */api/messages/{id}*
 
 
-> Update or replace a message \
+> Update or replace a message: \
 > <span style="color:lawngreen"> PUT </span> */api/messages/{id}*
 
 > Delete a specific message:\
@@ -91,6 +117,17 @@ To access the api go to http://localhost:8080/login.
 </details>
 
 <details><summary><b>Conversations</b></summary>
+
+| **HTTP** | **URL**                               | **Authentication** | **Request Body (JSON)**        | **Response Body (JSON)**          | 
+|----------|---------------------------------------|--------------------|--------------------------------|-----------------------------------|
+| POST     | */api/conversations*                  | yes                | serialized conversation object | serialized conversation object    | 
+| GET      | */api/conversations*                  | yes                | [empty]                        | serialized Iterable<Conversation> | 
+| GET      | */api/conversations/{id}*             | yes                | [empty]                        | serialized conversation object    | 
+| GET      | */api/conversations/of/{id}*          | yes                | [empty]                        | serialized Iterable<Conversation> | 
+| GET      | */api/conversations/of/{id}/active*   | yes                | [empty]                        | serialized Iterable<Conversation> | 
+| GET      | */api/conversations/of/{id}/inactive* | yes                | [empty]                        | serialized Iterable<Conversation> | 
+| PUT      | */api/conversations/{id}*             | yes                | serialized conversation object | [empty]                           | 
+| DELETE   | */api/conversations/{id}*             | yes                | [empty]                        | [empty]                           | 
 
 > Save a new conversation: \
 > <span style="color:lawngreen"> POST </span> */api/conversations*
@@ -112,16 +149,17 @@ To access the api go to http://localhost:8080/login.
 > <span style="color:lawngreen"> GET </span> */api/conversations/{id}*
 
 
-> Update or replace a conversation \
-> <span style="color:lawngreen"> PUT </span> */api/conversation*
+> Update or replace a conversation: \
+> <span style="color:lawngreen"> PUT </span> */api/conversations{id}*
 
 > Delete a specific conversation:\
-> <span style="color:lawngreen"> DELETE </span> */api/conversation/{id}*
+> <span style="color:lawngreen"> DELETE </span> */api/conversations/{id}*
 </details>
 
 ## What's next
+
 - Adding unit tests
-- Integration of this API in a mobile App, most likely written in Kotlin
+- Integration of this API in a mobile App, most likely written in Kotlin or creation of a React web-app using this API
 - ...
 
 ## License
