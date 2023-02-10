@@ -22,11 +22,6 @@ public class MessageController {
     public ResponseEntity<?> newMessage(@Valid @RequestBody Message newMessage) {
         return new ResponseEntity<Message>(messageService.save(newMessage), HttpStatus.CREATED);
     }
-
-    //    @GetMapping("/messages/{id}")
-//    public ResponseEntity<?> findById(@PathVariable int id) {
-//        return new ResponseEntity<Message>(messageService.findById(id), HttpStatus.OK);
-//    }
     @GetMapping("/messages/{id}")
     public ResponseEntity<?> findById(@PathVariable int id) {
         return new ResponseEntity<Message>(messageService.findById(id), HttpStatus.OK);

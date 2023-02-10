@@ -4,8 +4,10 @@ import com.example.haruchat.entity.Conversation;
 import com.example.haruchat.repository.ConversationRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.argon2.Argon2PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.text.MessageFormat;
 import java.time.ZonedDateTime;
 
 @Service
@@ -13,12 +15,13 @@ public class ConversationService {
     @Autowired
     private ConversationRepository conversationRepository;
 
+
     public Conversation save(Conversation conversation) {
         return conversationRepository.save(conversation);
     }
 
     public Conversation findById(int conversationId) {
-        return conversationRepository.findById(conversationId).orElse(null);
+        return conversationRepository.findById(conversationId).orElseThrow(() -> new EntityNotFoundException(MessageFormat.format("Could not find conversation with ID: {0}", conversationId)));
     }
 
     public Iterable<Conversation> findAll() {
@@ -40,7 +43,7 @@ public class ConversationService {
         try {
             conversationRepository.deleteById(conversationId);
         } catch (EntityNotFoundException e) {
-            System.err.println("Unable to delete Conversation with ID: " + conversationId);
+            System.err.println(MessageFormat.format("Unable to delete conversation with ID: {0}", conversationId));
         }
     }
 

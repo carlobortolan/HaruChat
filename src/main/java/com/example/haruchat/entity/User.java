@@ -1,6 +1,8 @@
 package com.example.haruchat.entity;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -28,21 +30,31 @@ public abstract class User
     private Integer id;
 
     @NotBlank
+    @JsonProperty(access = Access.WRITE_ONLY)
     @Size(min = 8, max = 128)
     private String password;
+
     @NotBlank
     @Column(unique = true)
     @Size(min = 1, max = 32)
     private String username;
+
     @Email
     @Column(unique = true)
     private String email;
+
+    @Enumerated(EnumType.STRING)
+    private UserRole userRole = UserRole.ROLE_USER;
+
     @ManyToMany(cascade = CascadeType.PERSIST)
     private List<User> friends;
+
     @ManyToMany(cascade = CascadeType.PERSIST)
     private List<User> blockedUsers;
+
     @ManyToMany()
     private List<Conversation> chats = new LinkedList<>();
+
     @OneToMany(mappedBy = "from", cascade = CascadeType.PERSIST)
     private List<Message> messagesSent;
 //    @OneToMany(mappedBy = "to")
@@ -57,11 +69,9 @@ public abstract class User
         this.blockedUsers = blockedUsers;
         this.chats = chats;
         this.messagesSent = messagesSent;
-//        this.messagesReceived = messagesReceived;
     }
 
     public User() {
-
     }
 
     public void block() {
@@ -76,6 +86,10 @@ public abstract class User
         //TODO:
     }
 
+    public void promoteToAdmin() {
+        this.userRole = UserRole.ROLE_ADMIN;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -86,7 +100,7 @@ public abstract class User
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        final SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority("rolePlaceholder");
+        final SimpleGrantedAuthority simpleGrantedAuthority = new SimpleGrantedAuthority(this.userRole.name());
         return Collections.singletonList(simpleGrantedAuthority);
     }
 
@@ -168,11 +182,12 @@ public abstract class User
         this.messagesSent = messagesSent;
     }
 
-//    public List<Message> getMessagesReceived() {
-//        return messagesReceived;
-//    }
-//
-//    public void setMessagesReceived(List<Message> messagesReceived) {
-//        this.messagesReceived = messagesReceived;
-//    }
+    public UserRole getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
+    }
+
 }

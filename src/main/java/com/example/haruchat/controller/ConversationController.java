@@ -25,16 +25,16 @@ public class ConversationController {
     }
 
     @GetMapping("/conversations/{id}")
-    public ResponseEntity<?> findAllById(@PathVariable int id) {
+    public ResponseEntity<?> findById(@PathVariable int id) {
         return new ResponseEntity<Conversation>(conversationService.findById(id), HttpStatus.OK);
     }
 
-    @GetMapping("/conversations/by/{id}")
+    @GetMapping("/conversations/of/{id}")
     public ResponseEntity<?> findAllByUserId(@PathVariable int id) {
         return new ResponseEntity<Iterable<Conversation>>(conversationService.findAllByUserId(id), HttpStatus.OK);
     }
 
-    @GetMapping("/conversations/by/{id}/active")
+    @GetMapping("/conversations/of/{id}/active")
     public ResponseEntity<?> findAllActive(@PathVariable int id) {
         return new ResponseEntity<Iterable<Conversation>>(conversationService.findAllActiveByUserId(id), HttpStatus.OK);
     }

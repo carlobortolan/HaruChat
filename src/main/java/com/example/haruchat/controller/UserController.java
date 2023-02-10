@@ -2,21 +2,30 @@ package com.example.haruchat.controller;
 
 import com.example.haruchat.entity.BasicUser;
 import com.example.haruchat.entity.User;
+import com.example.haruchat.service.RequestValidationService;
 import com.example.haruchat.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
 public class UserController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private RequestValidationService requestValidationService;
+
 
     @PostMapping("/users")
-    public ResponseEntity<?> newUser(@Valid @RequestBody User newUser) {
+    public ResponseEntity<?> newUser(@Valid @RequestBody User newUser, BindingResult bindingResult) {
+        Map<String, String> errorMap = requestValidationService.handleValidationErrors(bindingResult);
+        if (errorMap != null) return new ResponseEntity<Map<String, String>>(errorMap, HttpStatus.BAD_REQUEST);
         return new ResponseEntity<User>(userService.save(newUser), HttpStatus.CREATED);
     }
 
@@ -36,7 +45,9 @@ public class UserController {
     }
 
     @PutMapping("/users/{id}")
-    public ResponseEntity<?> replaceUser(@PathVariable int id, @Valid @RequestBody User newUser) {
+    public ResponseEntity<?> replaceUser(@PathVariable int id, @Valid @RequestBody User newUser, BindingResult bindingResult) {
+        Map<String, String> errorMap = requestValidationService.handleValidationErrors(bindingResult);
+        if (errorMap != null) return new ResponseEntity<Map<String, String>>(errorMap, HttpStatus.BAD_REQUEST);
         newUser.setId(id);
         userService.save(newUser);
         return new ResponseEntity<String>(HttpStatus.NO_CONTENT);
