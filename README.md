@@ -31,8 +31,9 @@ does not include any tests (yet)._
 You can now access the API as an Admin using the provided JWT-Token as Bearer Token.
 
 To access the database go to http://localhost:8080/h2-console/. \
-To access the api go to http://localhost:8080/login.
+To access the API go to http://localhost:8080/login.
 
+> **NOTE:** _(per default this API uses the H2-DataBase which doesn't need additional programs to be used. To change this to MySQL or similar DBMS see 'Setting up persistent database with MySQL')._
 ## Endpoints
 
 <details><summary><b>Authentication</b></summary>
@@ -155,6 +156,24 @@ To access the api go to http://localhost:8080/login.
 > Delete a specific conversation:\
 > <span style="color:lawngreen"> DELETE </span> */api/conversations/{id}*
 </details>
+
+## Setting up persistent database with MySQL
+
+Per default the standard H2-DataBase is used.
+To change this to a MySQL database:
+
+1. Create a new schema called "haruchat" in MySQL
+2. Go to application.properties
+    - change: `spring.datasource.url=jdbc:h2:mem:testdb` \
+      to: `spring.datasource.url=jdbc:mysql://localhost:3306/haruchat
+      `
+
+    - add:
+    ```
+    spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+    spring.jpa.hibernate.ddl-auto=update
+    ```
+    - insert your MySQL credentials in `spring.datasource.username=`and `spring.datasource.password=`
 
 ## What's next
 

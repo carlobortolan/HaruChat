@@ -12,7 +12,7 @@
     <artifactId>HaruChat</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>HaruChat</name>
-    <description>HaruChat</description>
+    <description>A basic REST-API for a chat application using Spring.</description>
     <properties>
         <java.version>17</java.version>
     </properties>
@@ -54,7 +54,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -74,6 +73,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
         </dependency>
     </dependencies>
 
