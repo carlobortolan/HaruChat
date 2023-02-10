@@ -7,11 +7,12 @@ does not include any tests (yet)._
 
 ## Core functionalities
 
-- Full CRUD-Operation available (_see Endpoints below_)
-- User data securely stored and encrypted in db
+- API that enables user 
+- Full CRUD-Operations available (_see Endpoints below_)
+- User data securely stored and encrypted in database
 - Integration of Spring-Security:
     - Basic Authentication by username (email) and password
-    - JWT Token Authentication (by basic bearer token)
+    - JWT Token Authentication (by bearer token) for stateless access without needing to provide the credentials in every request
 
 ## How it works
 
@@ -117,6 +118,11 @@ To access the api go to http://localhost:8080/login.
 > Delete a specific conversation:\
 > <span style="color:lawngreen"> DELETE </span> */api/conversation/{id}*
 </details>
+
+## What's next
+- Adding unit tests
+- Integration of this API in a mobile App, most likely written in Kotlin
+- ...
 
 ## License
 
