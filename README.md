@@ -20,7 +20,7 @@ does not include any tests (yet)._
 
 (The use of tools such as [POSTMAN](https://www.postman.com/) is highly recommended)
 
-### Credentials for easy access:
+### Credentials for basic access
 
 - username: `admin`
 
