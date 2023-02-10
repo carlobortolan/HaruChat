@@ -2,8 +2,8 @@
 
 **A basic REST-API for a chat application using Spring.**
 
-> __NOTE__: _As this project was mainly used for learning purposes and therefore has private api keys and tokens exposed and
-does not include any tests (yet) it should not be used for any kind of deployment._
+> __NOTE__: _As this project was mainly used for learning purposes, it has private api keys / tokens exposed and
+does not include any tests (yet)._
 
 ## Core functionalities
 
