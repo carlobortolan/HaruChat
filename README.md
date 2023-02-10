@@ -7,7 +7,7 @@ does not include any tests (yet)._
 
 ## Core functionalities
 
-- API that enables user 
+- API that creates basis for a chat platform consisting of multiple users that can start conversations (either direct conversations or group conversations) and exchange messages
 - Full CRUD-Operations available (_see Endpoints below_)
 - User data securely stored and encrypted in database
 - Integration of Spring-Security:
