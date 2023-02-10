@@ -188,3 +188,8 @@ To change this to a MySQL database:
 ### Licensed under
 
 GNU Affero General Public License v3.0 ([ AGPL-3.0 license ](https://www.gnu.org/licenses/))
+
+
+> Carlo Bortolan &nbsp;&middot;&nbsp;
+> GitHub [@carlobortolan](https://github.com/carlobortolan) &nbsp;&middot;&nbsp;
+> e-mail [@carlo.bortolan@tum.de](carlo.bortolan@tum.de)
