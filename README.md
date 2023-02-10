@@ -9,7 +9,7 @@ does not include any tests (yet)._
 
 - API that creates basis for a chat platform consisting of multiple users that can start conversations (either direct
   conversations or group conversations) and exchange messages
-- Full CRUD-Operations available (_see Endpoints below_)
+- Full CRUD-Operations supported (_see [Endpoints](#endpoints)_)
 - User data securely stored and encrypted in database
 - Integration of Spring-Security:
     - Basic Authentication by username (email) and password
@@ -26,9 +26,9 @@ does not include any tests (yet)._
 
 - password: `password`
 
-> POST/http://localhost:8081/api/users with Basic Authentication using the above credentials.
+> POST/http://localhost:8081/api/token with basic authentication using the above credentials.
 
-You can now access the API as an Admin using the provided JWT-Token as Bearer Token.
+You can now access the API as an admin using the provided JWT-Token as Bearer Token.
 
 To access the database go to http://localhost:8080/h2-console/. \
 To access the API go to http://localhost:8080/login.
