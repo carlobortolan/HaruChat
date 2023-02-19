@@ -1,6 +1,9 @@
+
 # HaruChat
 
 **A basic REST-API for a chat application using Spring.**
+
+> __NOTE__: __THIS PROJECT HAS BEEN PUT ON-HOLD.__
 
 > __NOTE__: _As this project was mainly used for learning purposes, it has private api keys / tokens exposed and
 does not include any tests (yet)._
@@ -26,7 +29,7 @@ does not include any tests (yet)._
 
 - password: `password`
 
-> POST/http://localhost:8081/api/token with basic authentication using the above credentials.
+> POST/http://localhost:8080/api/token with basic authentication using the above credentials.
 
 You can now access the API as an admin using the provided JWT-Token as Bearer Token.
 
@@ -179,8 +182,10 @@ To change this to a MySQL database:
 
 ## What's next
 
-- Adding unit tests
-- Integration of this API in a mobile App, most likely written in Kotlin or creation of a React web-app using this API
+- ~Adding method level authorization~
+- ~Adding unit tests~
+- ~Integration of this API in a mobile App, most likely written in Kotlin or creation of a React web-app using this API~
+
 - ...
 
 ## License
